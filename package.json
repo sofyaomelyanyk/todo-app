@@ -4,11 +4,12 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "@ant-design/icons": "5.5.1",
+    "antd": "5.21.6",
+    "nanoid": "^5.0.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "^5.0.0",
-    "antd": "5.21.6",
-    "@ant-design/icons": "5.5.1"
+    "react-scripts": "^5.0.0"
   },
   "devDependencies": {
     "@types/react": "18.2.38",

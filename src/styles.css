@@ -22,12 +22,14 @@ html {
   height: 100vh;
   width: 100%;
   z-index: -1;
+  opacity: 0.5;
 }
 
 .bgImage img {
   height: 100%;
   width: 100%;
-  object-fit: cover; /* Или object-fit: contain, в зависимости от нужд */
+  object-position: bottom;
+  object-fit: cover; 
 }
 /* CSS Reset */
 *,

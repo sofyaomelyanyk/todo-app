@@ -1,13 +1,10 @@
 import { useState } from "react";
-import {
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  SaveOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
-import "./styles.css";
+import { nanoid } from "nanoid";
 import bgImage from "./assets/images/bg-3.png";
+import "./styles.css";
+import TodoInput from "./components/TodoInput/TodoInput";
+import TodoList from "./components/TodoInput/TodoList/TodoList";
+import NoTaskMessage from "./components/TodoInput/NoTaskMessage/NoTaskMessage";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -17,7 +14,7 @@ export default function App() {
 
   const createTodo = () => {
     const newTodo = {
-      id: Date.now(),
+      id: nanoid(),
       name: newTaskName,
     };
 
@@ -50,91 +47,30 @@ export default function App() {
     setNewTaskName(e.target.value);
   };
 
-  const handleChangeTaskName = (e) => {
-    setEditTaskName(e.target.value);
-  };
-
-  console.log(todos.length);
-
   return (
     <>
       <div className="bgImage">
-        <img src={bgImage} alt="" />
+        <img src={bgImage} alt="Flowers" />
       </div>
       <div className="App">
-        <div className="inputContainer">
-          <input
-            placeholder="Add a new task"
-            type="text"
-            name="name"
-            id="name"
-            value={newTaskName}
-            onChange={(e) => handleSetTaskName(e)}
-          />
+        <TodoInput
+          newTaskName={newTaskName}
+          handleSetTaskName={handleSetTaskName}
+          createTodo={createTodo}
+        />
 
-          <button
-            type="button"
-            disabled={!newTaskName.trim()}
-            onClick={() => createTodo()}
-          >
-            <PlusOutlined />
-          </button>
-        </div>
         {todos.length > 0 ? (
-          <ul className="todoList">
-            {!!todos.length &&
-              todos.map(({ id, name }) => (
-                <li key={id} className="todoItem">
-                  {editingTodoId === id ? (
-                    <>
-                      <input
-                        type="text"
-                        name="newName"
-                        id="newName"
-                        className="editInput"
-                        value={editTaskName}
-                        onChange={(e) => handleChangeTaskName(e)}
-                      />
-                      <div className="btnWrap">
-                        <button type="button" onClick={() => updateTodo(id)}>
-                          <SaveOutlined />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setEditingTodoId(null)}
-                        >
-                          <CloseOutlined />
-                        </button>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="textWrap">
-                        <p>{name}</p>
-                      </div>
-                      <div className="btnWrap">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setEditingTodoId(id);
-                            setEditTaskName(name);
-                          }}
-                        >
-                          <EditOutlined />
-                        </button>
-                        <button type="button" onClick={() => deleteTodo(id)}>
-                          <DeleteOutlined />
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </li>
-              ))}
-          </ul>
+          <TodoList
+            todos={todos}
+            editingTodoId={editingTodoId}
+            setEditingTodoId={setEditingTodoId}
+            editTaskName={editTaskName}
+            setEditTaskName={setEditTaskName}
+            updateTodo={updateTodo}
+            deleteTodo={deleteTodo}
+          />
         ) : (
-          <div className="noTaskWrap">
-            <p>You have no any todos yet</p>
-          </div>
+          <NoTaskMessage />
         )}
       </div>
     </>
