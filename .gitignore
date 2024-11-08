@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Windows Installer files
+Thumbs.db
+ehthumbs.db
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# build
+/dist
+/build
+/out/
+
+# dotenv environment variable files
+.env
+.env.local
+.env.*.local
+
+# Next.js
+.next/
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# VuePress
+.vuepress/dist/
+
+# SvelteKit
+.svelte-kit/
+
+# Static site generators (e.g., Gatsby, Hugo, Jekyll)
+public/
